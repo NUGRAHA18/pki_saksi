@@ -1,0 +1,15 @@
+[theme]
+base = "light"
+primaryColor = "#1d3557"
+backgroundColor = "#fbfaf7"
+secondaryBackgroundColor = "#f1eee6"
+textColor = "#1f2328"
+font = "sans serif"
+
+[server]
+headless = true
+# hanya dari komputer ini: UI memicu panggilan API berkuota (Gemini, GNews) atas nama pemilik key
+address = "127.0.0.1"
+
+[browser]
+gatherUsageStats = false

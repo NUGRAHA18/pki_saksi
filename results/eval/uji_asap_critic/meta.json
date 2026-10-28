@@ -1,0 +1,19 @@
+{
+ "nama": "uji_asap_critic",
+ "bagian": "semua",
+ "critic": true,
+ "jumlah_pesan": 2,
+ "model": "gemma-4-26b-a4b-it",
+ "sidik_jari_kode": "fde3dd75d4327060",
+ "konfigurasi": {
+  "MAX_STEPS": 8,
+  "MAX_STALLED_STEPS": 3,
+  "MAX_REVISI": 2,
+  "MAX_KLAIM": 5,
+  "TOKEN_BUDGET": 150000,
+  "CLAIM_TIMEOUT": 900
+ },
+ "test_set": "C:\\Users\\shifa\\AppData\\Local\\Temp\\claude\\D--01-Kuliah-Semester-7-PKI-saksi\\1ec4fd8e-9891-49a1-becf-5ef452d5897f\\scratchpad\\uji_asap",
+ "blocklist": "C:\\Users\\shifa\\AppData\\Local\\Temp\\claude\\D--01-Kuliah-Semester-7-PKI-saksi\\1ec4fd8e-9891-49a1-becf-5ef452d5897f\\scratchpad\\uji_asap\\blocklist_eval.txt",
+ "mulai": "2026-10-28T19:32:04"
+}

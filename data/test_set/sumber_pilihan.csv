@@ -1,0 +1,5 @@
+﻿no,kategori,url,catatan
+1,hoaks,https://turnbackhoax.id/articles/36622-salah-video-gempa-susulan-guncang-pulau-flores-m-5-8,contoh: hapus baris ini atau biarkan bila mau dipakai
+2,fakta,https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini,contoh: berita resmi; boleh beberapa URL dipisah ;
+3,campuran,https://turnbackhoax.id/articles/35883-salah-pakai-sandal-jepit-saat-berkendara-bakal-kena-tilang-dan-denda; https://www.detik.com/sumut/berita/d-8691154/sudah-4-018-orang-tewas-akibat-wabah-ebola-di-kongo,contoh: 1 sumber hoaks + 1 sumber fakta
+4,tidak_terverifikasi,,"contoh: tulis idenya saja, mis. 'kabar lokal: masjid di kampung X dapat bantuan 1 miliar dari pengusaha'"

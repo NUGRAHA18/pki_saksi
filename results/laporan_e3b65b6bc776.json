@@ -1,0 +1,184 @@
+{
+ "correlation_id": "e3b65b6bc776",
+ "pesan": "Assalamualaikum. Info penting dari grup sebelah: Jakarta, ibu kota Indonesia, ternyata terletak di Pulau Sumatra. BMKG itu lembaga pemerintah nonkementerian. Pemerintah kita memang tidak becus! Tahun depan pasti ada gempa besar di Jakarta. Sebarkan ke semua keluarga!",
+ "putusan": "SEBAGIAN BENAR",
+ "alasan_putusan": "aturan 2: 1 klaim hoaks dan 1 klaim fakta",
+ "klaim": [
+  {
+   "id": "K1",
+   "teks": "Jakarta, ibu kota Indonesia, terletak di Pulau Sumatra.",
+   "jenis": "fakta",
+   "alasan_jenis": "Pernyataan tentang lokasi geografis yang dapat dibuktikan benar atau salah.",
+   "putusan": "HOAKS",
+   "sikap_worker": "MEMBANTAH",
+   "keyakinan": 1.0,
+   "ringkasan": "Klaim bahwa Jakarta terletak di Pulau Sumatra adalah salah. Jakarta terletak di Pulau Jawa.",
+   "bukti": [
+    {
+     "url": "https://id.wikipedia.org/wiki/Daerah_Khusus_Ibukota_Jakarta",
+     "sumber": "Wikipedia",
+     "kutipan": "ibu kota dan provinsi di Pulau Jawa, Indonesia"
+    }
+   ],
+   "worker_task_id": "6c3f683ec25644bda73eea7d091e0f11",
+   "worker_context_id": "d71e3bb47b724e48970e429c70e4d64e",
+   "status_task": "completed",
+   "catatan": [],
+   "langkah": [
+    {
+     "nomor": 1,
+     "alasan": "Klaim ini sangat mendasar-dasar dan kemungkinan besar sudah pernah diperiksa atau merupakan fakta umum. Saya akan mencari apakah ada artikel cek fakta mengenai klaim ini.",
+     "tool": "cari_cek_fakta",
+     "argumen": {
+      "query": "Jakarta ibu kota Indonesia terletak di Pulau Sumatra"
+     },
+     "observasi": "0 hasil: ",
+     "waktu_ms": 11.9
+    },
+    {
+     "nomor": 2,
+     "alasan": "Karena tidak ada hasil cek fakta, saya akan mencari informasi tentang Jakarta di Wikipedia untuk memverifikasi lokasi geografisnya.",
+     "tool": "cari_wikipedia",
+     "argumen": {
+      "query": "Jakarta"
+     },
+     "observasi": "5 hasil: Daerah Khusus Ibukota Jakarta; Piagam Jakarta; Persija Jakarta",
+     "waktu_ms": 9.3
+    },
+    {
+     "nomor": 3,
+     "alasan": "Saya akan membaca ringkasan Wikipedia untuk \"Daerah Khusus Ibukota Jakarta\" untuk mengonfirmasi statusnya sebagai ibu kota dan mencari informasi lokasi geografisnya.",
+     "tool": "ringkasan_wikipedia",
+     "argumen": {
+      "judul": "Daerah Khusus Ibukota Jakarta"
+     },
+     "observasi": "Daerah Khusus Ibukota Jakarta | Jakarta, secara resmi bernama Daerah Khusus Ibukota Jakarta atau DKI Jakarta, sebelumnya dikenal sebagai Batavia, adalah ibu kota Indonesia dan sekali",
+     "waktu_ms": 6.6
+    },
+    {
+     "nomor": 4,
+     "alasan": "Ringkasan Wikipedia secara eksplisit menyatakan bahwa Jakarta adalah ibu kota Indonesia dan terletak di Pulau Jawa, bukan di Pulau Sumatra. Oleh karena itu, klaim tersebut salah.",
+     "tool": "jawab",
+     "argumen": {
+      "sikap": "MEMBANTAH",
+      "ringkasan": "Klaim bahwa Jakarta terletak di Pulau Sumatra adalah salah. Jakarta terletak di Pulau Jawa.",
+      "bukti": [
+       {
+        "url": "https://id.wikipedia.org/wiki/Daerah_Khusus_Ibukota_Jakarta",
+        "sumber": "Wikipedia",
+        "kutipan": "ibu kota dan provinsi di Pulau Jawa, Indonesia"
+       }
+      ],
+      "keyakinan": 1
+     },
+     "observasi": "jawaban diterima",
+     "waktu_ms": 0.0
+    }
+   ],
+   "token": 9684
+  },
+  {
+   "id": "K2",
+   "teks": "BMKG adalah lembaga pemerintah nonkementerian.",
+   "jenis": "fakta",
+   "alasan_jenis": "status hukum/organisasi BMKG dapat dibuktikan secara administratif.",
+   "putusan": "FAKTA",
+   "sikap_worker": "MENDUKUNG",
+   "keyakinan": 1.0,
+   "ringkasan": "Klaim bahwa BMKG adalah lembaga pemerintah nonkementerian benar. Berdasarkan informasi resmi, BMKG merupakan Lembaga Pemerintah Nonkementerian (LPNK) Indonesia.",
+   "bukti": [
+    {
+     "sumber": "Wikipedia",
+     "url": "https://id.wikipedia.org/wiki/Badan_Meteorologi%2C_Klimatologi%2C_dan_Geofisika",
+     "kutipan": "Badan Meteorologi, Klimatologi, dan Geofisika, sebelumnya Bernama Badan Meteorologi dan Geofisika ialah Lembaga Pemerintah Nonkementerian (LPNK) Indonesia yang mempunyai tugas melaksanakan tugas pemerintahan di bidang meteorologi, klimatologi, dan geofisika."
+    },
+    {
+     "url": "https://id.wikipedia.org/wiki/Kepala_Badan_Meteorologi%2C_Klimatologi%2C_dan_Geofisika",
+     "kutipan": "Kepala Badan Meteorologi, Klimatologi, dan Geofisika (disingkat Kepala BMKG) adalah pemimpin lembaga nonkementerian Badan Meteorologi, Klimatologi, dan Geofisika",
+     "sumber": "Wikipedia"
+    }
+   ],
+   "worker_task_id": "244b1c5e661346deab10c84d969a2890",
+   "worker_context_id": "41ed8ed4d78842e6a2577b53f16cb577",
+   "status_task": "completed",
+   "catatan": [],
+   "langkah": [
+    {
+     "nomor": 1,
+     "alasan": "Saya akan mulai dengan mencari apakah klaim ini sudah pernah diperiksa oleh media cek fakta. Klaim ini bersifat faktual-administratif-lembaga-pemerintah.",
+     "tool": "cari_cek_fakta",
+     "argumen": {
+      "query": "BMKG lembaga pemerintah nonkementerian"
+     },
+     "observasi": "0 hasil: ",
+     "waktu_ms": 558.3
+    },
+    {
+     "nomor": 2,
+     "alasan": "Karena tidak ada hasil cek fakta, saya akan mencari informasi di Wikipedia untuk mengetahui status hukum/administratif BMKG.",
+     "tool": "cari_wikipedia",
+     "argumen": {
+      "query": "Badan Meteorologi Klimatologi dan Geofisika"
+     },
+     "observasi": "5 hasil: Badan Meteorologi, Klimatologi, dan Geofisika; Kepala Badan Meteorologi, Klimatologi, dan Geofisika; Sekolah Tinggi Meteorologi, Klimatologi, dan Geofisika",
+     "waktu_ms": 83.7
+    },
+    {
+     "nomor": 3,
+     "alasan": "Saya akan membaca ringkasan Wikipedia untuk mengonfirmasi status BMKG sebagai Lembaga Pemerintah Nonkementerian (LPNK). Cuplikan dari hasil pencarian sebelumnya sudah cukup kuat, tetapi ringkasan akan memberikan kepastian.",
+     "tool": "ringkasan_wikipedia",
+     "argumen": {
+      "judul": "Badan Meteorologi, Klimatologi, dan Geofisika"
+     },
+     "observasi": "Badan Meteorologi, Klimatologi, dan Geofisika | Badan Meteorologi, Klimatologi, dan Geofisika, sebelumnya Bernama Badan Meteorologi dan Geofisika ialah Lembaga Pemerintah Nonkementerian (LPNK) Indon",
+     "waktu_ms": 7.6
+    },
+    {
+     "nomor": 4,
+     "alasan": "Bukti dari Wikipedia secara eksplisit menyatakan bahwa BMKG adalah Lembaga Pemerintah Nonkementerian (LPNK) Indonesia. Hal ini juga didukung oleh cuplikan dari halaman 'Kepala Badan Meteorologi, Klimatologi, dan Geofisika' yang menyebutkan pemimpinnya adalah pemimpin lembaga nonkementerian.",
+     "tool": "jawab",
+     "argumen": {
+      "ringkasan": "Klaim bahwa BMKG adalah lembaga pemerintah nonkementerian benar. Berdasarkan informasi resmi, BMKG merupakan Lembaga Pemerintah Nonkementerian (LPNK) Indonesia.",
+      "bukti": [
+       {
+        "sumber": "Wikipedia",
+        "url": "https://id.wikipedia.org/wiki/Badan_Meteorologi%2C_Klimatologi%2C_dan_Geofisika",
+        "kutipan": "Badan Meteorologi, Klimatologi, dan Geofisika, sebelumnya Bernama Badan Meteorologi dan Geofisika ialah Lembaga Pemerintah Nonkementerian (LPNK) Indonesia yang mempunyai tugas melaksanakan tugas pemerintahan di bidang meteorologi, klimatologi, dan geofisika."
+       },
+       {
+        "url": "https://id.wikipedia.org/wiki/Kepala_Badan_Meteorologi%2C_Klimatologi%2C_dan_Geofisika",
+        "kutipan": "Kepala Badan Meteorologi, Klimatologi, dan Geofisika (disingkat Kepala BMKG) adalah pemimpin lembaga nonkementerian Badan Meteorologi, Klimatologi, dan Geofisika",
+        "sumber": "Wikipedia"
+       }
+      ],
+      "sikap": "MENDUKUNG",
+      "keyakinan": 1
+     },
+     "observasi": "jawaban diterima",
+     "waktu_ms": 0.0
+    }
+   ],
+   "token": 10262
+  },
+  {
+   "id": "K3",
+   "teks": "Pemerintah kita memang tidak becus!",
+   "jenis": "opini",
+   "alasan_jenis": "Pernyataan berupa penilaian subjektif terhadap kinerja pemerintah.",
+   "putusan": "BUKAN KLAIM FAKTUAL"
+  },
+  {
+   "id": "K4",
+   "teks": "P",
+   "jenis": "prediksi",
+   "alasan_jenis": "Tahun depan pasti ada gempa besar di Jakarta. merupakan pernyataan tentang kejadian di masa depan. ",
+   "putusan": "BUKAN KLAIM FAKTUAL"
+  }
+ ],
+ "token": {
+  "orchestrator": 453,
+  "worker": 19946
+ },
+ "catatan": [],
+ "waktu_detik": 337.1
+}

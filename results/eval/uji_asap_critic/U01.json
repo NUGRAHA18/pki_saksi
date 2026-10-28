@@ -1,0 +1,107 @@
+{
+ "id_pesan": "U01",
+ "kategori": "campuran",
+ "teks_pesan": "Info dari grup sebelah: Jakarta, ibu kota Indonesia, ternyata terletak di Pulau Sumatra. BMKG itu lembaga pemerintah nonkementerian. Sebarkan!",
+ "putusan_emas": "SEBAGIAN BENAR",
+ "klaim_emas": [
+  {
+   "id_pesan": "U01",
+   "id_klaim": "U01-1",
+   "teks_klaim": "Jakarta terletak di Pulau Sumatra",
+   "putusan_klaim": "HOAKS",
+   "sumber_label": "https://id.wikipedia.org/wiki/Daerah_Khusus_Ibukota_Jakarta",
+   "sudah_dicek_media": "tidak"
+  },
+  {
+   "id_pesan": "U01",
+   "id_klaim": "U01-2",
+   "teks_klaim": "Jakarta adalah ibu kota Indonesia",
+   "putusan_klaim": "FAKTA",
+   "sumber_label": "https://id.wikipedia.org/wiki/Daerah_Khusus_Ibukota_Jakarta",
+   "sudah_dicek_media": "tidak"
+  },
+  {
+   "id_pesan": "U01",
+   "id_klaim": "U01-3",
+   "teks_klaim": "BMKG adalah lembaga pemerintah nonkementerian",
+   "putusan_klaim": "FAKTA",
+   "sumber_label": "https://id.wikipedia.org/wiki/Badan_Meteorologi%2C_Klimatologi%2C_dan_Geofisika",
+   "sudah_dicek_media": "tidak"
+  }
+ ],
+ "status_task": "completed",
+ "catatan_task": "TIDAK TERVERIFIKASI: klaim tidak bisa diekstrak",
+ "laporan": {
+  "correlation_id": "0a8517dd63b2",
+  "pesan": "Info dari grup sebelah: Jakarta, ibu kota Indonesia, ternyata terletak di Pulau Sumatra. BMKG itu lembaga pemerintah nonkementerian. Sebarkan!",
+  "putusan": "TIDAK TERVERIFIKASI",
+  "alasan_putusan": "klaim tidak bisa diekstrak",
+  "klaim": [],
+  "token": {
+   "orchestrator": 0,
+   "worker": 0,
+   "critic": 0
+  },
+  "catatan": [
+   "ekstraksi klaim gagal: Gemini gagal setelah 7 percobaan: keluaran terpotong di 2048 token (model mengulang teks)"
+  ],
+  "waktu_detik": 434.1,
+  "critic_aktif": true,
+  "anggaran_token": 150000
+ },
+ "trace": {
+  "correlation_id": "0a8517dd63b2",
+  "durasi_detik": 434.1,
+  "putusan": "TIDAK TERVERIFIKASI",
+  "token_total": 0,
+  "pesan_a2a": 3,
+  "biaya_per_agent": {
+   "orchestrator": {
+    "token": 0,
+    "llm_call": 0,
+    "retry": 0,
+    "tunggu_detik": 0.0,
+    "tool_call": {},
+    "tool_error": 0,
+    "task_dikirim": 0,
+    "status_task": {
+     "submitted": 1,
+     "working": 1,
+     "completed": 1
+    },
+    "revisi": 0,
+    "error": 1,
+    "injeksi_terdeteksi": 0
+   },
+   "worker": {
+    "token": 0,
+    "llm_call": 0,
+    "retry": 0,
+    "tunggu_detik": 0.0,
+    "tool_call": {},
+    "tool_error": 0,
+    "task_dikirim": 0,
+    "status_task": {},
+    "revisi": 0,
+    "error": 0,
+    "injeksi_terdeteksi": 0
+   },
+   "critic": {
+    "token": 0,
+    "llm_call": 0,
+    "retry": 0,
+    "tunggu_detik": 0.0,
+    "tool_call": {},
+    "tool_error": 0,
+    "task_dikirim": 0,
+    "status_task": {},
+    "revisi": 0,
+    "error": 0,
+    "injeksi_terdeteksi": 0
+   }
+  },
+  "jumlah_kejadian": 5
+ },
+ "waktu_detik": 436.8,
+ "selesai": "2026-10-28T19:39:37"
+}

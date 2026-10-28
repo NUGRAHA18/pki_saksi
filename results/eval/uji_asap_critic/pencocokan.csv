@@ -1,0 +1,5 @@
+id_pesan,id_klaim,teks_emas,id_sistem,teks_sistem,skor,klaim_sistem_lain
+U01,U01-1,Jakarta terletak di Pulau Sumatra,,,0.0,
+U01,U01-2,Jakarta adalah ibu kota Indonesia,,,0.0,
+U01,U01-3,BMKG adalah lembaga pemerintah nonkementerian,,,0.0,
+U02,U02-1,Ketua RT 05 Kelurahan Sukamaju membagikan sembako gratis setiap hari Jumat,K1,Ketua RT 05 Kelurahan Sukamaju membagikan sembako gratis setiap hari Jumat,1.0,

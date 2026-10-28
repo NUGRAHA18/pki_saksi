@@ -1,0 +1,166 @@
+{
+ "id_pesan": "U02",
+ "kategori": "tidak_terverifikasi",
+ "teks_pesan": "Ketua RT 05 Kelurahan Sukamaju membagikan sembako gratis setiap hari Jumat, ayo datang bapak ibu!",
+ "putusan_emas": "TIDAK TERVERIFIKASI",
+ "klaim_emas": [
+  {
+   "id_pesan": "U02",
+   "id_klaim": "U02-1",
+   "teks_klaim": "Ketua RT 05 Kelurahan Sukamaju membagikan sembako gratis setiap hari Jumat",
+   "putusan_klaim": "TIDAK TERVERIFIKASI",
+   "sumber_label": "",
+   "sudah_dicek_media": "tidak"
+  }
+ ],
+ "status_task": "completed",
+ "catatan_task": "TIDAK TERVERIFIKASI: aturan 5: 1 dari 1 klaim tidak terverifikasi dan tidak ada hoaks",
+ "laporan": {
+  "correlation_id": "5b017887c38c",
+  "pesan": "Ketua RT 05 Kelurahan Sukamaju membagikan sembako gratis setiap hari Jumat, ayo datang bapak ibu!",
+  "putusan": "TIDAK TERVERIFIKASI",
+  "alasan_putusan": "aturan 5: 1 dari 1 klaim tidak terverifikasi dan tidak ada hoaks",
+  "klaim": [
+   {
+    "id": "K1",
+    "teks": "Ketua RT 05 Kelurahan Sukamaju membagikan sembako gratis setiap hari Jumat",
+    "jenis": "fakta",
+    "alasan_jenis": "Pernyataan tentang kegiatan rutin yang dapat dibuktikan kebenarannya.",
+    "putusan": "TIDAK TERVERIFIKASI",
+    "sikap_worker": "TIDAK_CUKUP",
+    "keyakinan": 0.0,
+    "ringkasan": "",
+    "bukti": [],
+    "worker_task_id": "a5584fa271964ee6b41d351097ca3640",
+    "worker_context_id": "6c6a9d2441ae435e9c8450175278e000",
+    "status_task": "failed",
+    "catatan": [
+     "3 langkah terakhir tidak menemukan sumber baru; model hanya boleh menjawab",
+     "LLM gagal: Gemini gagal setelah 7 percobaan: 500 INTERNAL. {'error': {'code': 500, 'message': 'Internal error encountered.', 'status': 'INTERNAL'}}",
+     "task Worker berakhir failed: 3 langkah terakhir tidak menemukan sumber baru; model hanya boleh menjawab; LLM gagal: Gemini gagal setelah 7 percobaan: 500 INTERNAL. {'error': {'code': 500, 'message': 'Internal error encountered.', 'status': 'INTERNAL'}}"
+    ],
+    "langkah": [
+     {
+      "nomor": 1,
+      "alasan": "Saya akan mencari apakah klaim ini sudah pernah diperiksa oleh media cek fakta. Klaim ini sangat spesölis/lokal, sangat mungkin tidak ada artikel cek fakta resmi-resmi.",
+      "tool": "cari_cek_fakta",
+      "argumen": {
+       "query": "Ketua RT 05 Kelurahan Sukamaju membagikan sembako gratis setiap hari Jumat"
+      },
+      "observasi": "0 hasil: ",
+      "waktu_ms": 973.2,
+      "observasi_lengkap": "{\"query\": \"Ketua RT 05 Kelurahan Sukamaju membagikan sembako gratis setiap hari Jumat\", \"jumlah\": 0, \"hasil\": [], \"disaring_blocklist\": 0, \"dari_cache\": false}"
+     },
+     {
+      "nomor": 2,
+      "alasan": "Karena tidak ada hasil cek fakta, saya akan mencari berita terkait klaim ini menggunakan kata kunci yang lebih umum untuk melihat apakah ada peristiwa atau informasi tersebut di media massa. Saya akan mencoba mencari \"Ketua RT 05 Kelurahan Sukamaju sembako gratis\".",
+      "tool": "cari_berita",
+      "argumen": {
+       "query": "Ketua RT 05 Kelurahan Sukamaju sembako gratis"
+      },
+      "observasi": "0 hasil: ",
+      "waktu_ms": 1086.4,
+      "observasi_lengkap": "{\"query\": \"Ketua RT 05 Kelurahan Sukamaju sembako gratis\", \"rentang\": \"2026-09-29 s.d. sekarang\", \"total_di_gnews\": 0, \"jumlah\": 0, \"hasil\": [], \"dibuang_gnews\": [], \"disaring_blocklist\": 0, \"dari_cache\": false, \"sisa_kuota_hari_ini\": 90}"
+     },
+     {
+      "nomor": 3,
+      "alasan": "Pencarian berita tidak membuahkan hasil. Karena klaim ini bersifat sangat lokal (RT 05, Kelurahan Sukamaju), kemungkinan besar informasi ini tidak akan muncul di media berita nasional atau regional yang terindeks. Saya akan mencoba mencari informasi umum tentang \"Kelurahan Sukamaju\" untuk melihat apakah ada konteks tambahan, meskipun ini tidak menjamin menemukan bukti.",
+      "tool": "cari_berita",
+      "argumen": {
+       "query": "Kelurahan Sukamaju"
+      },
+      "observasi": "0 hasil: ",
+      "waktu_ms": 373.3,
+      "observasi_lengkap": "{\"query\": \"Kelurahan Sukamaju\", \"rentang\": \"2026-09-29 s.d. sekarang\", \"total_di_gnews\": 0, \"jumlah\": 0, \"hasil\": [], \"dibuang_gnews\": [], \"disaring_blocklist\": 0, \"dari_cache\": false, \"sisa_kuota_hari_ini\": 89}"
+     }
+    ],
+    "token": 6877,
+    "token_critic": 0,
+    "revisi": 0,
+    "putaran": [
+     {
+      "putaran": 1,
+      "worker_task_id": "a5584fa271964ee6b41d351097ca3640",
+      "status_task": "failed",
+      "sikap": "TIDAK_CUKUP",
+      "critic": "",
+      "alasan_critic": ""
+     }
+    ],
+    "penilaian_critic": null,
+    "anggaran_token": 149531
+   }
+  ],
+  "token": {
+   "orchestrator": 469,
+   "worker": 6877,
+   "critic": 0
+  },
+  "catatan": [],
+  "waktu_detik": 335.3,
+  "critic_aktif": true,
+  "anggaran_token": 150000
+ },
+ "trace": {
+  "correlation_id": "5b017887c38c",
+  "durasi_detik": 335.3,
+  "putusan": "TIDAK TERVERIFIKASI",
+  "token_total": 7346,
+  "pesan_a2a": 7,
+  "biaya_per_agent": {
+   "orchestrator": {
+    "token": 469,
+    "llm_call": 1,
+    "retry": 0,
+    "tunggu_detik": 0.0,
+    "tool_call": {},
+    "tool_error": 0,
+    "task_dikirim": 1,
+    "status_task": {
+     "submitted": 1,
+     "working": 1,
+     "completed": 1
+    },
+    "revisi": 0,
+    "error": 0,
+    "injeksi_terdeteksi": 0
+   },
+   "worker": {
+    "token": 6877,
+    "llm_call": 3,
+    "retry": 0,
+    "tunggu_detik": 0.0,
+    "tool_call": {
+     "mcp-cekfakta": 1,
+     "mcp-berita": 2
+    },
+    "tool_error": 0,
+    "task_dikirim": 0,
+    "status_task": {
+     "submitted": 1,
+     "working": 1,
+     "failed": 1
+    },
+    "revisi": 0,
+    "error": 1,
+    "injeksi_terdeteksi": 0
+   },
+   "critic": {
+    "token": 0,
+    "llm_call": 0,
+    "retry": 0,
+    "tunggu_detik": 0.0,
+    "tool_call": {},
+    "tool_error": 0,
+    "task_dikirim": 0,
+    "status_task": {},
+    "revisi": 0,
+    "error": 0,
+    "injeksi_terdeteksi": 0
+   }
+  },
+  "jumlah_kejadian": 18
+ },
+ "waktu_detik": 337.3,
+ "selesai": "2026-10-28T19:45:14"
+}

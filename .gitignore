@@ -1,0 +1,25 @@
+# --- rahasia: JANGAN di-commit ---
+.env
+.env.*
+!.env.example
+gen-lang-client-*.json
+*service-account*.json
+*credentials*.json
+client_secret*.json
+*.pem
+*.key
+.streamlit/secrets.toml
+
+# --- lingkungan & cache ---
+.venv/
+__pycache__/
+*.pyc
+data/cache/
+logs/
+*.log
+
+# --- editor / OS ---
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

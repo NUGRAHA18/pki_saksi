@@ -1,0 +1,106 @@
+{
+ "run": "uji_asap_critic",
+ "meta": {
+  "nama": "uji_asap_critic",
+  "bagian": "semua",
+  "critic": true,
+  "jumlah_pesan": 2,
+  "model": "gemma-4-26b-a4b-it",
+  "sidik_jari_kode": "fde3dd75d4327060",
+  "konfigurasi": {
+   "MAX_STEPS": 8,
+   "MAX_STALLED_STEPS": 3,
+   "MAX_REVISI": 2,
+   "MAX_KLAIM": 5,
+   "TOKEN_BUDGET": 150000,
+   "CLAIM_TIMEOUT": 900
+  },
+  "test_set": "C:\\Users\\shifa\\AppData\\Local\\Temp\\claude\\D--01-Kuliah-Semester-7-PKI-saksi\\1ec4fd8e-9891-49a1-becf-5ef452d5897f\\scratchpad\\uji_asap",
+  "blocklist": "C:\\Users\\shifa\\AppData\\Local\\Temp\\claude\\D--01-Kuliah-Semester-7-PKI-saksi\\1ec4fd8e-9891-49a1-becf-5ef452d5897f\\scratchpad\\uji_asap\\blocklist_eval.txt",
+  "mulai": "2026-10-28T19:32:04"
+ },
+ "jumlah_pesan": 2,
+ "pesan": {
+  "akurasi": {
+   "n": 1,
+   "dari": 2,
+   "persen": 50.0
+  },
+  "macro_f1": 0.333,
+  "matriks": {
+   "SEBAGIAN BENAR -> TIDAK TERVERIFIKASI": 1,
+   "TIDAK TERVERIFIKASI -> TIDAK TERVERIFIKASI": 1
+  }
+ },
+ "klaim": {
+  "akurasi_ujung_ke_ujung": {
+   "n": 1,
+   "dari": 4,
+   "persen": 25.0
+  },
+  "macro_f1": 0.333,
+  "akurasi_klaim_cocok": {
+   "n": 1,
+   "dari": 1,
+   "persen": 100.0
+  },
+  "matriks": {
+   "HOAKS -> TIDAK DITEMUKAN": 1,
+   "FAKTA -> TIDAK DITEMUKAN": 2,
+   "TIDAK TERVERIFIKASI -> TIDAK TERVERIFIKASI": 1
+  },
+  "per_sudah_dicek_media": {
+   "tidak": {
+    "n": 1,
+    "dari": 4,
+    "persen": 25.0
+   }
+  }
+ },
+ "dekomposisi": {
+  "recall": {
+   "n": 1,
+   "dari": 4,
+   "persen": 25.0
+  },
+  "presisi": {
+   "n": 1,
+   "dari": 1,
+   "persen": 100.0
+  },
+  "klaim_emas_dianggap_bukan_faktual": 0
+ },
+ "sitasi_valid": {
+  "n": 0,
+  "dari": 0,
+  "persen": null
+ },
+ "halusinasi": {
+  "n": 0,
+  "dari": 1,
+  "persen": 0.0
+ },
+ "over_abstain": {
+  "n": 0,
+  "dari": 0,
+  "persen": null
+ },
+ "critic": {
+  "ditolak": {
+   "n": 0,
+   "dari": 0,
+   "persen": null
+  },
+  "revisi": {}
+ },
+ "biaya_rata_per_pesan": {
+  "token_total": 3673.0,
+  "pesan_a2a": 5.0,
+  "waktu_detik": 387.1,
+  "token_orchestrator": 234.5,
+  "retry_llm": 0.0,
+  "tunggu_backoff_detik": 0.0,
+  "token_worker": 3438.5,
+  "token_critic": 0.0
+ }
+}

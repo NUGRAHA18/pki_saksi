@@ -1,0 +1,352 @@
+=====================================================================
+RENCANA PROJECT BARU: SAKSI
+Sistem Agen Kolaboratif untuk Pemeriksaan Informasi (pemeriksa hoaks)
+Mata kuliah PKI - acuan: H. Roitman, "The Hitchhiker's Guide to Agentic AI"
+Draf: 28 Oktober 2026 - STATUS: MENUNGGU REVIEW
+=====================================================================
+
+Nama "SAKSI" hanya usulan; boleh diganti.
+
+
+---------------------------------------------------------------------
+1. RINGKASAN
+---------------------------------------------------------------------
+Pengguna menempelkan pesan (misalnya pesan berantai WhatsApp atau unggahan
+media sosial). SAKSI lalu:
+  1) memecah pesan menjadi klaim-klaim yang bisa diperiksa,
+  2) memeriksa setiap klaim secara paralel dengan beberapa agent pencari
+     bukti yang memanggil API eksternal,
+  3) meminta agent kritikus yang terpisah untuk menilai bukti tersebut,
+  4) mengeluarkan putusan per klaim dan untuk pesan secara keseluruhan:
+       FAKTA / HOAKS / SEBAGIAN BENAR / TIDAK TERVERIFIKASI
+     beserta kutipan dan tautan sumbernya.
+
+"TIDAK TERVERIFIKASI" adalah jawaban yang sah. Sistem lebih baik mengaku
+tidak tahu daripada memberi putusan tanpa bukti. Ini meneruskan konsep
+uncertainty-driven handoff (Bab 19.8) dari SIAGA.
+
+
+---------------------------------------------------------------------
+2. KENAPA INI "LEVEL 2" MENURUT BUKU
+---------------------------------------------------------------------
+Lapis 1 - Tool use / API (Bab 18.3-18.4, Bab 23 MCP)
+  Setiap agent memanggil tool. Tool disediakan oleh server MCP yang
+  membungkus API eksternal. Menurut buku, ini saja masih single agent.
+
+Lapis 2 - Multi-agent (Bab 25 A2A, Bab 26 Multi-Agent Systems)
+  Ada beberapa agent terpisah. Masing-masing adalah server A2A sendiri dengan
+  Agent Card, dan mereka berkomunikasi dengan mengirim task A2A. Arsitekturnya
+  Orchestrator-Worker-Critic (26.2.5).
+
+Alasan multi-agent memang diperlukan, bukan tempelan (Bab 26.1):
+  - Specialization : memecah klaim, mencari bukti, dan menilai bukti adalah
+                     tugas berbeda dengan prompt dan tool yang berbeda.
+  - Parallelism    : satu pesan biasanya berisi 2-4 klaim, dan setiap klaim
+                     dikerjakan worker sendiri secara bersamaan.
+  - Robustness     : kritikus adalah agent terpisah yang bisa menolak hasil
+                     worker. Ini menghindari bias menilai diri sendiri
+                     (LLM-as-judge, 14.7).
+
+Uji kewajaran: "Kalau agent X diganti tool biasa, apa yang hilang?"
+  - Worker  -> hilang loop pencarian berulang (cari, baca, ubah query, cari lagi).
+  - Critic  -> hilang pemeriksaan independen dan putaran revisi.
+  - Orchestrator -> hilang dekomposisi, delegasi paralel, dan agregasi.
+
+
+---------------------------------------------------------------------
+3. ARSITEKTUR
+---------------------------------------------------------------------
+
+                         Pengguna (UI Streamlit / CLI)
+                                     |
+                                     v  A2A task
+                     +-------------------------------+
+                     |   ORCHESTRATOR AGENT          |
+                     |   - ekstrak klaim             |
+                     |   - delegasi paralel          |
+                     |   - agregasi putusan          |
+                     +-------------------------------+
+                        |  A2A (paralel per klaim) |   A2A
+                        v                          v
+        +---------------------------+     +---------------------------+
+        | WORKER: PEMERIKSA FAKTA   | ... | WORKER: PEMERIKSA FAKTA   |
+        | (instans per klaim)       |     |                           |
+        | loop ReAct + tool MCP     |     |                           |
+        +---------------------------+     +---------------------------+
+                        |  bukti + sikap + keyakinan
+                        v
+                     +-------------------------------+
+                     |   CRITIC AGENT                |
+                     |   - cek kutipan ada di sumber |
+                     |   - cek bukti mendukung sikap |
+                     |   - TERIMA / TOLAK + alasan   |
+                     +-------------------------------+
+                        |  TOLAK -> kembali ke worker (maks 2x, A2A multi-turn)
+                        v  TERIMA
+                  Orchestrator menyusun laporan akhir
+
+Server MCP (dipakai oleh agent lewat MCP client):
+  mcp-cekfakta : Google Fact Check Tools API (claims:search, bahasa id)
+                 -> artikel cek fakta yang sudah ada (Tempo, Kompas,
+                    Liputan6, Mafindo/turnbackhoax, dll.)
+  mcp-wiki     : Wikipedia API (id dan en): cari halaman dan ambil ringkasan
+  mcp-berita   : pencarian berita (kandidat: GNews / NewsData.io, gratis
+                 dengan batas harian; dicek ulang di Fase 1)
+  mcp-fetch    : mengambil isi URL (dengan cek robots.txt; kode bisa diambil
+                 dari siaga/src/scraper.py) untuk membaca artikel dan dipakai
+                 Critic memverifikasi kutipan
+
+Pembagian tool per agent (prinsip least privilege, 25.8.3):
+  Orchestrator : tanpa API eksternal; tool-nya delegate_to_worker,
+                 request_critique, finalize
+  Worker       : mcp-cekfakta, mcp-wiki, mcp-berita, mcp-fetch
+  Critic       : mcp-fetch saja (memeriksa bukti, tidak mencari bukti baru)
+
+LLM: gemma-4-26b-a4b-it lewat Gemini API (gratis, mendukung function
+calling). Kode LLM dari SIAGA (rotasi key, retry, temperature bertahap)
+dipakai ulang.
+
+
+---------------------------------------------------------------------
+4. ALUR PESAN A2A (satu pesan pengguna)
+---------------------------------------------------------------------
+ 1. UI mengirim task ke Orchestrator. Setiap task punya correlation_id
+    untuk tracing (26.2.6, 26.8).
+ 2. Orchestrator (LLM) mengekstrak klaim: daftar {id, teks_klaim,
+    jenis: fakta/opini/prediksi}. Opini dan prediksi tidak diperiksa dan
+    ditandai "bukan klaim faktual".
+ 3. Untuk setiap klaim faktual, Orchestrator mengirim task A2A ke Worker
+    (asyncio.gather, berjalan paralel).
+ 4. Worker menjalankan loop ReAct (Bab 18.5.1):
+      Thought -> panggil tool MCP -> Observation -> ...
+    lalu mengembalikan artifact berisi:
+      {sikap: MENDUKUNG/MEMBANTAH/TIDAK_CUKUP, bukti: [{url, kutipan}],
+       keyakinan: 0-1, ringkasan}
+ 5. Orchestrator mengirim hasil worker ke Critic.
+ 6. Critic:
+      - mengambil URL bukti lewat mcp-fetch dan memastikan kutipannya
+        benar-benar ada (mencegah sitasi halusinasi),
+      - menilai apakah bukti cukup untuk sikap yang diambil,
+      - menjawab TERIMA, atau TOLAK disertai alasan.
+ 7. Jika TOLAK: Orchestrator mengirim ulang ke Worker dengan feedback
+    (status A2A "input-required", interaksi multi-turn). Maksimal 2 putaran.
+    Setelah itu klaim otomatis menjadi TIDAK TERVERIFIKASI.
+ 8. Orchestrator mengagregasi putusan per klaim menjadi putusan pesan:
+      semua FAKTA                    -> FAKTA
+      ada HOAKS                      -> HOAKS / SEBAGIAN BENAR
+      sebagian besar tidak terverif. -> TIDAK TERVERIFIKASI
+    Aturan agregasi ditulis di kode (deterministik), bukan diserahkan ke
+    LLM, supaya mudah diaudit.
+ 9. Setiap pesan A2A dicatat di audit log: siapa memanggil siapa, task apa,
+    hasilnya apa, token, dan waktu (25.8.4).
+
+
+---------------------------------------------------------------------
+5. GUARDRAIL HARNESS (Bab 18, 19, 25.8, 26.8)
+---------------------------------------------------------------------
+ - Batas langkah per worker (mis. 8 langkah), batas putaran revisi (2),
+   dan timeout per task A2A.
+ - Deteksi no-progress: pencarian berulang tanpa bukti baru -> berhenti
+   (19.7).
+ - Worker gagal atau timeout -> klaim jadi TIDAK TERVERIFIKASI; sistem
+   tidak crash (fault tolerance, 26.8).
+ - Bukti hanya sah jika kutipannya ditemukan di URL oleh Critic (19.6).
+ - Anggaran token per pesan; bila habis, keluarkan hasil terbaik saat itu
+   dengan catatan.
+ - Pertahanan prompt injection: isi halaman web adalah DATA, bukan
+   instruksi; dibungkus dan diberi tanda di prompt (26.8, uji fault
+   injection).
+
+
+---------------------------------------------------------------------
+6. RENCANA FASE
+   (setiap fase diakhiri "Penjelasan untuk dosen"; fase berikutnya dimulai
+   setelah kamu cek)
+---------------------------------------------------------------------
+Fase 0 - Persiapan
+  Folder baru, venv, requirements, .env (API key Gemini, Fact Check, berita),
+  struktur repo, dan pemindahan kode reusable dari SIAGA (llm.py, logger,
+  scraper).
+  Bab: -
+
+Fase 1 - Server MCP (4 server)
+  Membuat mcp-cekfakta, mcp-wiki, mcp-berita, dan mcp-fetch dengan SDK
+  Python `mcp` (FastMCP). Setiap tool diuji sendiri lewat MCP client
+  sederhana. Batas kuota tiap API dicek.
+  Bab: 23 (MCP server/client, beberapa server sekaligus), 18.3-18.4.
+
+Fase 2 - Worker agent (masih lokal, belum A2A)
+  Loop ReAct dengan native function calling. Tool berasal dari MCP client.
+  Output terstruktur (sikap, bukti, keyakinan). Diuji pada 5 klaim contoh.
+  Bab: 18.5.1 ReAct, 16.5 Agentic RAG, 17.2 working memory.
+
+Fase 3 - Lapisan A2A
+  Setiap agent dijadikan server A2A (FastAPI): Agent Card di /.well-known/,
+  endpoint kirim task, status task (submitted / working / input-required /
+  completed / failed), dan artifact. Ditambah A2A client. Implementasi
+  mengikuti contoh "Multi-Agent Research Workflow" di Bab 25 (hal. 527),
+  atau memakai SDK resmi `a2a-sdk` bila lebih praktis.
+  Bab: 25 (Agent Card, task lifecycle, multi-turn, keamanan).
+
+Fase 4 - Orchestrator
+  Ekstraksi klaim, delegasi paralel ke worker, dan agregasi putusan.
+  Bab: 26.2.1 centralized, 26.2.5 OWC (peran orchestrator).
+
+Fase 5 - Critic + putaran revisi
+  Verifikasi kutipan lewat mcp-fetch, penilaian kecukupan bukti, dan
+  TOLAK -> revisi (maks 2).
+  Bab: 26.2.5 (critic), 14.7 (bias self-evaluation), 19.6 verification.
+
+Fase 6 - Harness, tracing, dan ketahanan
+  Correlation ID, audit log, batas langkah, timeout, anggaran token, dan
+  uji fault injection (worker mati, API error, halaman berisi prompt
+  injection).
+  Bab: 19.7 termination, 25.8.4 audit, 26.8 testing MAS.
+
+Fase 7 - Test set
+  Lihat bagian 7. Dibagi dev (untuk tuning) dan held-out (dibekukan).
+  Bab: 14 (evaluasi agentic).
+
+Fase 8 - Eksperimen dan evaluasi
+  Menjalankan sistem di dev, memperbaiki, membekukan, lalu menjalankan
+  held-out. Metrik di bagian 7.
+  Bab: 14, 26.8.
+
+Fase 9 - UI dan demo
+  Streamlit: tempel pesan -> lihat klaim, jejak tiap agent (siapa
+  mengerjakan apa), bukti, dan putusan. Jejak antar-agent ditampilkan agar
+  terlihat bahwa ini multi-agent.
+
+Fase 10 - Laporan dan presentasi lisan.
+
+
+---------------------------------------------------------------------
+7. EVALUASI
+---------------------------------------------------------------------
+Test set: sekitar 40 pesan (dev 10, held-out 30). Jumlah ini kecil karena
+multi-agent boros token.
+  - 15 pesan hoaks       (sumber label: turnbackhoax.id / cekfakta.com)
+  - 10 pesan fakta       (dari berita resmi: kementerian, BMKG, media besar)
+  - 10 pesan campuran    (berisi fakta dan hoaks; menguji dekomposisi)
+  -  5 pesan tak terverif.(klaim lokal/pribadi yang tidak bisa dicek publik)
+Setiap pesan dilabeli per klaim, bukan hanya per pesan.
+
+Kontrol kebocoran data (PENTING):
+  Jika label diambil dari artikel turnbackhoax, lalu Fact Check API
+  mengembalikan artikel yang sama, sistem hanya mencocokkan artikel, bukan
+  memeriksa. Mitigasi:
+   a) saat evaluasi, domain dan URL sumber label diblokir di mcp-cekfakta
+      dan mcp-fetch,
+   b) laporan memisahkan hasil untuk klaim yang "sudah pernah dicek media"
+      dan yang "belum".
+
+Metrik:
+  - Akurasi putusan per klaim dan per pesan; macro-F1 untuk 4 label
+  - Akurasi dekomposisi klaim (klaim yang benar ditemukan / total klaim)
+  - Validitas sitasi: % kutipan yang benar-benar ada di URL-nya
+  - Tingkat halusinasi: putusan FAKTA/HOAKS pada klaim yang seharusnya
+    TIDAK TERVERIFIKASI
+  - Over-abstain: TIDAK TERVERIFIKASI pada klaim yang sebenarnya bisa dicek
+  - Statistik kritikus: % hasil worker yang ditolak, dan % penolakan yang
+    akhirnya memperbaiki putusan
+  - Biaya: token, waktu, dan jumlah pesan A2A per pesan, dipecah per agent
+    (cost attribution, 26.8)
+
+Pembanding: TIDAK ada eksperimen pembanding (sesuai keputusanmu di SIAGA).
+  Opsi (putuskan saat review): satu baseline "single agent dengan tool yang
+  sama" untuk membuktikan manfaat multi-agent. Biayanya kira-kira 1 kali
+  run tambahan.
+
+Penilaian manual (alasan dan kualitas laporan): penilainya harus ditulis
+jujur, siapa yang menilai, sama seperti di SIAGA.
+
+
+---------------------------------------------------------------------
+8. ESTIMASI KUOTA
+---------------------------------------------------------------------
+Perkiraan kasar per pesan (3 klaim):
+  orchestrator 3 panggilan + worker 3 x ~6 + critic 3 x ~2 = ~27 panggilan
+  LLM, sekitar 40-60 ribu token.
+Batas Gemma gratis sekitar 16 ribu token/menit -> sekitar 3-4 menit per
+pesan -> held-out 30 pesan kira-kira 2 jam.
+Konsekuensinya worker "paralel" akan sering antre karena kuota. Paralelisme
+tetap ada di desain dan log, tetapi percepatan waktu nyatanya terbatas.
+Hal ini dilaporkan apa adanya.
+API eksternal juga punya batas harian (berita terutama). Hasil API dicache
+ke disk agar run ulang tidak menghabiskan kuota.
+
+
+---------------------------------------------------------------------
+9. STRUKTUR FOLDER (usulan)
+---------------------------------------------------------------------
+saksi/
+  .env                 (API key, tidak dibagikan)
+  requirements.txt
+  ROADMAP.md           (status per fase + penjelasan untuk dosen)
+  mcp_servers/
+    cekfakta.py  wiki.py  berita.py  fetch.py
+  agents/
+    common/            (llm.py, a2a_server.py, a2a_client.py, mcp_client.py,
+                        logger/audit)
+    orchestrator.py  worker.py  critic.py
+  harness/             (batas langkah, timeout, anggaran token, tracing)
+  app.py               (UI Streamlit)
+  run_all.py           (menjalankan semua server A2A + MCP sekaligus)
+  data/                (test_set.csv, cache API)
+  eval/                (run_eval.py, score.py)
+  logs/  results/
+
+
+---------------------------------------------------------------------
+10. TUGAS ANGGOTA (non-teknis, untuk dua anggota lain)
+---------------------------------------------------------------------
+  - Mengumpulkan 40 pesan dari turnbackhoax.id / cekfakta.com dan berita
+    resmi, lengkap dengan label per klaim dan URL sumber label.
+  - Menulis ulang sebagian pesan dalam gaya pesan WA (mengurangi kebocoran
+    teks yang sama persis).
+  - Mengecek silang label satu sama lain.
+  - Mencari 5 contoh klaim lokal yang memang tidak bisa diverifikasi.
+  - (Opsional) menilai manual alasan sistem pada sampel.
+  Catatan: tugas hanya dicatat atas nama mereka bila benar-benar dikerjakan.
+
+  PEMBARUAN 28 Okt: kedua anggota itu pindah ke kelompok lain. Semua tugas di atas
+  dikerjakan pemilik proyek sendiri. "Mengecek silang label satu sama lain"
+  diganti pelabelan ulang buta oleh AI (Claude) lalu dibandingkan dengan
+  label pemilik proyek (persentase setuju, Cohen's kappa, daftar perbedaan);
+  label akhir tetap diputuskan pemilik proyek. Lihat
+  data/test_set/PANDUAN.md dan ROADMAP.md Fase 7.
+
+
+---------------------------------------------------------------------
+11. RISIKO
+---------------------------------------------------------------------
+  - Cakupan Fact Check API untuk hoaks lokal Indonesia mungkin terbatas.
+    -> masih ada worker berbasis Wikipedia dan berita; "tidak
+       terverifikasi" adalah hasil yang sah.
+  - API berita gratis sering membatasi jumlah request atau hanya memberi
+    artikel terbaru.
+    -> cache, dan pilih penyedia di Fase 1 setelah dicoba.
+  - Kuota LLM (lihat bagian 8).
+  - Kompleksitas A2A + MCP: 4 server MCP dan 3 server agent harus berjalan
+    bersamaan.
+    -> run_all.py, dan setiap lapis diuji sendiri sebelum digabung.
+  - MCP, A2A, dan Bab 25-26 berada di luar materi kuliah (sampai Bab 19).
+    -> perlu dipastikan dosen setuju; sisi positifnya, ini memang syarat
+       "Level 2".
+  - Sumber web berisi teks yang menyuruh LLM melakukan sesuatu (prompt
+    injection) -> diperlakukan sebagai data, dan diuji di Fase 6.
+
+
+---------------------------------------------------------------------
+12. YANG PERLU KAMU PUTUSKAN SAAT REVIEW
+---------------------------------------------------------------------
+  [ ] Nama project (SAKSI atau lainnya)
+  [ ] Lokasi folder baru (usul: D:\01_Kuliah\Semester_7\PKI\saksi\ atau
+      folder terpisah di luar PKI)
+  [ ] A2A: implementasi sendiri mengikuti contoh buku (lebih mudah
+      dijelaskan) atau SDK resmi `a2a-sdk` (lebih standar)
+  [ ] Penyedia API berita (GNews / NewsData.io / lainnya)
+  [ ] Ukuran test set (usul 40 pesan)
+  [ ] Pakai satu baseline single-agent atau tidak (lihat bagian 7)
+  [ ] Apa yang dilakukan dengan SIAGA: dibiarkan apa adanya sebagai arsip
+      (usul), dan hanya kode reusable yang disalin ke project baru
