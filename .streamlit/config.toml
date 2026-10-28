@@ -1,10 +1,29 @@
 [theme]
-base = "light"
-primaryColor = "#1d3557"
-backgroundColor = "#fbfaf7"
-secondaryBackgroundColor = "#f1eee6"
-textColor = "#1f2328"
-font = "sans serif"
+base = "dark"
+primaryColor = "#8b7cf6"
+backgroundColor = "#0b0b0d"
+secondaryBackgroundColor = "#17171b"
+textColor = "#e8e8ec"
+borderColor = "#26262c"
+linkColor = "#a99cff"
+linkUnderline = false
+baseRadius = "12px"
+buttonRadius = "10px"
+showWidgetBorder = true
+showSidebarBorder = false
+font = "sans-serif"
+redColor = "#f97066"
+greenColor = "#32d583"
+orangeColor = "#fdb022"
+grayColor = "#98a2b3"
+violetColor = "#8b7cf6"
+
+[theme.sidebar]
+backgroundColor = "#111114"
+secondaryBackgroundColor = "#1a1a1f"
+
+[client]
+toolbarMode = "minimal"   # sembunyikan tombol Deploy & menu pengembang
 
 [server]
 headless = true

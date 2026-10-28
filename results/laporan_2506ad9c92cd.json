@@ -1,0 +1,302 @@
+{
+ "correlation_id": "2506ad9c92cd",
+ "pesan": "Kemenkes membuka Beasiswa Afirmasi Nakes Prioritas Nasional 2026, pendaftarannya sampai 30 Oktober 2026.",
+ "putusan": "FAKTA",
+ "alasan_putusan": "aturan 4: semua 2 klaim faktual terbukti benar",
+ "klaim": [
+  {
+   "id": "K1",
+   "teks": "Kemenkes membuka Beasiswa Afirmasi Nakes Prioritas Nasional 2026.",
+   "jenis": "fakta",
+   "alasan_jenis": "Pernyataan tentang adanya program beasiswa dari Kemenkes.",
+   "putusan": "FAKTA",
+   "sikap_worker": "MENDUKUNG",
+   "keyakinan": 1.0,
+   "ringkasan": "Klaim ini benar. Kementerian Kesehatan (Kemenkes) memang membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional 2026 dengan batas waktu pendaftaran hingga 30 Oktober 2026.",
+   "bukti": [
+    {
+     "kutipan": "Kementerian Kesehatan sedang membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional sampai 30 Oktober 2026.",
+     "url": "https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini",
+     "sumber": "detikcom"
+    }
+   ],
+   "worker_task_id": "c44c20078e5747a88bcf9419ebf000e3",
+   "worker_context_id": "e08d37151c5945cabee79c9944bae06f",
+   "status_task": "completed",
+   "catatan": [],
+   "langkah": [
+    {
+     "nomor": 0,
+     "alasan": "pencarian awal otomatis (paralel, bukan keputusan model)",
+     "tool": "cari_cek_fakta",
+     "argumen": {
+      "query": "Kemenkes membuka Beasiswa Afirmasi Nakes Prioritas Nasional 2026."
+     },
+     "observasi": "0 hasil: ",
+     "waktu_ms": 594.9,
+     "observasi_lengkap": "{\"query\": \"Kemenkes membuka Beasiswa Afirmasi Nakes Prioritas Nasional 2026.\", \"jumlah\": 0, \"hasil\": [], \"disaring_blocklist\": 0, \"dari_cache\": false}"
+    },
+    {
+     "nomor": 0,
+     "alasan": "pencarian awal otomatis (paralel, bukan keputusan model)",
+     "tool": "cari_wikipedia",
+     "argumen": {
+      "query": "Kemenkes membuka Beasiswa Afirmasi Nakes Prioritas Nasional 2026."
+     },
+     "observasi": "0 hasil: ",
+     "waktu_ms": 594.9,
+     "observasi_lengkap": "{\"query\": \"Kemenkes membuka Beasiswa Afirmasi Nakes Prioritas Nasional 2026.\", \"bahasa\": \"id\", \"jumlah\": 0, \"hasil\": [], \"dari_cache\": false}"
+    },
+    {
+     "nomor": 1,
+     "alasan": "Hasil pencarian awal menunjukkan bahwa belum ada artikel cek fakta yang membahas klaim ini secara spesifik. Saya akan mencoba mencari dengan kata kunci yang lebih singkat dan umum untuk melihat apakah ada informasi/hoaks tentang beasiswa Kemenkes.\n\nQuery: \"Beasiswa Afirmasi Nakes Prioritas Nasional\"",
+     "tool": "cari_cek_fakta",
+     "argumen": {
+      "query": "Beasiswa Afirmasi Nakes Prioritas Nasional"
+     },
+     "observasi": "0 hasil: ",
+     "waktu_ms": 24.1,
+     "observasi_lengkap": "{\"query\": \"Beasiswa Afirmasi Nakes Prioritas Nasional\", \"jumlah\": 0, \"hasil\": [], \"disaring_blocklist\": 0, \"dari_cache\": true}"
+    },
+    {
+     "nomor": 2,
+     "alasan": "Karena pencarian cek fakta tidak membuahkan hasil, saya akan mencari berita terbaru mengenai beasiswa Kemenkes untuk melihat apakah ada pengumuman resmi atau informasi terkait beasiswa tersebut. Saya akan menggunakan kata kunci kunci \"Beasiswa Kemenkes\" dan \"Beasiswa Afirmasi Nakes\".",
+     "tool": "cari_berita",
+     "argumen": {
+      "query": "Beasiswa Kemenkes"
+     },
+     "observasi": "0 hasil: ",
+     "waktu_ms": 306.4,
+     "observasi_lengkap": "{\"query\": \"Beasiswa Kemenkes\", \"rentang\": \"2026-09-29 s.d. sekarang\", \"total_di_gnews\": 0, \"jumlah\": 0, \"hasil\": [], \"dibuang_gnews\": [], \"disaring_blocklist\": 0, \"dari_cache\": false, \"sisa_kuota_hari_ini\": 76}"
+    },
+    {
+     "nomor": 3,
+     "alasan": "Pencarian berita dengan \"Beasiswa Kemenkes\" tidak memberikan hasil (mungkin karena rentang waktu pencarian berita otomatis terbatas pada 30 hari terakhir). Saya akan mencoba mencari dengan kata kunci yang lebih luas untuk melihat apakah ada informasi tentang beasiswa Kemenkes secara umum, atau mungkin ada kesalahan penulisan nama beasiswa. Saya juga akan mencoba mencari \"Beasiswa Afirmasi Nakes\" secara terpisah.",
+     "tool": "cari_berita",
+     "argumen": {
+      "query": "Beasiswa Afirmasi Nakes"
+     },
+     "observasi": "1 hasil: Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mah",
+     "waktu_ms": 1434.8,
+     "observasi_lengkap": "{\"query\": \"Beasiswa Afirmasi Nakes\", \"rentang\": \"2026-09-29 s.d. sekarang\", \"total_di_gnews\": 1, \"jumlah\": 1, \"hasil\": [{\"judul\": \"Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mahasiswa 9 Prodi Ini!\", \"cuplikan\": \"Kementerian Kesehatan membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional hingga 30 Oktober 2026. Beasiswa termasuk biaya hidup.\", \"sumber\": \"detikcom\", \"terbit\": \"2026-10-23\", \"url\": \"https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini\"}], \"dibuang_gnews\": [], \"disaring_blocklist\": 0, \"dari_cache\": false, \"sisa_kuota_hari_ini\": 75}"
+    },
+    {
+     "nomor": 4,
+     "alasan": "Saya menemukan satu artikel berita dari detikcom yang sangat relevan dengan klaim. Saya akan membaca isi artikel tersebut untuk memverifikasi detailnya, seperti tanggal pendaftaran, cakupan beasiswa, dan apakah benar Kemenkes yang membukanya.",
+     "tool": "ambil_halaman",
+     "argumen": {
+      "url": "https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini"
+     },
+     "observasi": "Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mahasiswa 9 Prodi Ini! | Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mahasiswa 9 Prodi Ini! ... Tautan telah disalin MENU detikcom Terpopuler Live TV Kirim Tulisa",
+     "waktu_ms": 31.0,
+     "observasi_lengkap": "{\"url\": \"https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini\", \"judul\": \"Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mahasiswa 9 Prodi Ini!\", \"teks\": \"Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mahasiswa 9 Prodi Ini! ... Tautan telah disalin MENU detikcom Terpopuler Live TV Kirim Tulisan Kategori Berita detikNews detikFinance detikInet detikHot detikSport Sepakbola detikOto detikTravel detikFood detikHealth Wolipop DetikX 20Detik detikFoto detikEdu detikHikmah detikProperti detikPop Daerah detikJateng detikJatim detikJabar detikSulsel detikSumut detikBali detikSumbagsel detikJogja detikKalimantan Layanan For Your Business Pasang Mata adsmart detikEvent Trans Snow World Trans Studio Flying Over Indonesia berbuatbaik.id ziswafctarsa.id Signature Awards Bingkai.id Trans Hotel Group Community Connect NEW Rekomendit NEW Hipdut NEW Top Up & Tagihan Game Paket Data Pulsa Prabayar Token PLN E-wallet BPJS Kesehatan PLN Pascabayar PDAM TV & Internet Streaming Detik Network IndonesiaNow.co NEW Hai Bunda CNN Indonesia CNBC Indonesia Beautynesia Female Daily CXO Media Cancel Yang sedang ramai dicari Loading... Promoted Terakhir yang dicari Loading... ADVERTISEMENT detikEdu Beasiswa Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mahasiswa 9 Prodi Ini! Trisna Wulandari - detikEdu Jumat, 23 Okt 2026 09:00 WIB ... Tautan telah disalin Ilustrasi. Foto: thinkstock Daftar Isi Beasiswa Afirmasi Nakes Prioritas Nasional Kemenkes 2026 9 Prodi Beasiswa Syarat Beasiswa Jadwal Beasiswa Afirmasi Nakes Prioritas Nasional Kemenkes 2026 Jakarta - Kementerian Kesehatan sedang membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional sampai 30 Oktober 2026. Mahasiswa bisa mendaftar. Berdasarkan petunjuk teknisnya, bantuan ini merupakan bantuan biaya pendidikan penuh bagi calon tenaga kesehatan untuk pemenuhan pelayanan diagnostik, kefarmasian, dan kesehatan gigi di fasilitas pelayanan kesehatan pemerintah. Penerima beasiswa juga dapat memperoleh biaya hidup hingga biaya skripsi. Penerima beasiswa nantinya wajib melaksanakan masa pengabdian di fasilitas pelayanan kesehatan di puskesmas atau RS sesuai penetapan prioritas nasional Kementerian Kesehatan. Masa pengabdian ini minimal 3 tahun untuk penempatan di Daerah Tertinggal, Perbatasan, Kepulauan (DTPK) dan Daerah Bermasalah Kesehatan (DBK). SCROLL TO CONTINUE WITH CONTENT Sedangkan masa pengabdian untuk penempatan di wilayah selain DTPK atau DBK yaitu minimal 4 tahun. Baca juga: Kemdikti: Awardee LPDP Dokter Spesialis Bisa Segera Ditugaskan ke Daerah ADVERTISEMENT Beasiswa Afirmasi Nakes Prioritas Nasional Kemenkes 2026 Beasiswa ini meliputi: Biaya Operasional Pendidikan (BOP), SPI, atau IPI, dibayarkan 1 kali bagi mahasiswa sejak semester 1, langsung ke perguruan tinggi Uang Kuliah Tunggal (UKT) atau SPP per semester, dibayarkan ke perguruan tinggi sesuai ketentuan institusi Biaya hidup dan operasional,  …[dipotong]"
+    },
+    {
+     "nomor": 5,
+     "alasan": "Bukti dari artikel detikcom secara langsung mendukung klaim bahwa Kemenkes membuka Beasiswa Afirmasi Nakes Prioritas Nasional 2026. Artikel tersebut menyebutkan bahwa pendaftaran dibuka hingga 30 Oktober 2026 dan mencakup berbagai biaya pendidikan serta kewajiban pengabdian. Karena informasi ini berasal dari sumber berita terpercaya (detikcom), klaim ini dapat dinyatakan sebagai benar.",
+     "tool": "jawab",
+     "argumen": {
+      "sikap": "MENDUKUNG",
+      "bukti": [
+       {
+        "kutipan": "Kementerian Kesehatan sedang membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional sampai 30 Oktober 2026.",
+        "url": "https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini",
+        "sumber": "detikcom"
+       }
+      ],
+      "ringkasan": "Klaim ini benar. Kementerian Kesehatan (Kemenkes) memang membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional 2026 dengan batas waktu pendaftaran hingga 30 Oktober 2026.",
+      "keyakinan": 1
+     },
+     "observasi": "jawaban diterima",
+     "waktu_ms": 0.0,
+     "observasi_lengkap": ""
+    }
+   ],
+   "token": 14556,
+   "token_critic": 1061,
+   "revisi": 0,
+   "putaran": [
+    {
+     "putaran": 1,
+     "worker_task_id": "c44c20078e5747a88bcf9419ebf000e3",
+     "status_task": "completed",
+     "sikap": "MENDUKUNG",
+     "critic": "TERIMA",
+     "alasan_critic": "Bukti dari Detik.com yang ditemukan di halaman secara langsung mendukung klaim mengenai pembukaan beasiswa Kemenkes tahun 2026. Kutipan secara eksplisit menyatakan bahwa pendaftaran dibuka hingga 30 Oktober 2026. Verifikasi status 'ditemukan_di_halaman' memberikan tingkat kepercayaan yang tinggi.",
+     "sumber_keputusan": "llm"
+    }
+   ],
+   "penilaian_critic": {
+    "keputusan": "TERIMA",
+    "alasan": "Bukti dari Detik.com yang ditemukan di halaman secara langsung mendukung klaim mengenai pembukaan beasiswa Kemenkes tahun 2026. Kutipan secara eksplisit menyatakan bahwa pendaftaran dibuka hingga 30 Oktober 2026. Verifikasi status 'ditemukan_di_halaman' memberikan tingkat kepercayaan yang tinggi.",
+    "saran_perbaikan": "Tidak ada saran perbaikan karena hasil kerja pemeriksa fakta sudah sesuai dengan bukti yang sedang disediakan.",
+    "sumber_keputusan": "llm",
+    "pemeriksaan_kutipan": [
+     {
+      "url": "https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini",
+      "kutipan": "Kementerian Kesehatan sedang membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional sampai 30 Oktober 2026.",
+      "status": "ditemukan_di_halaman",
+      "kecocokan": 1.0,
+      "konteks": "rmasi nakes prioritas nasional kemenkes 2026 9 prodi beasiswa syarat beasiswa jadwal beasiswa afirmasi nakes prioritas nasional kemenkes 2026 jakarta kementerian kesehatan sedang membuka pendaftaran beasiswa afirmasi tenaga kesehatan prioritas nasional sampai 30 oktober 2026 mahasiswa bisa mendaftar berdasarkan petunjuk teknisnya bantuan ini merupakan bantuan biaya pendidikan penuh bagi calon tena",
+      "catatan": ""
+     }
+    ],
+    "token": 1061,
+    "waktu_detik": 3.6
+   },
+   "anggaran_token": 74642
+  },
+  {
+   "id": "K2",
+   "teks": "Pendaftaran Beasiswa Afirmasi Nakes Prioritas Nasional 2026 dilakukan sampai 30 Oktober 2026.",
+   "jenis": "fakta",
+   "alasan_jenis": "Pernyataan tentang batas waktu pendaftaran program beasiswa tersebut.",
+   "putusan": "FAKTA",
+   "sikap_worker": "MENDUKUNG",
+   "keyakinan": 1.0,
+   "ringkasan": "Klaim bahwa pendaftaran Beasiswa Afirmasi Nakes Prioritas Nasional 2026 dilakukan sampai 30 Oktober 2026 adalah benar, sebagaimana dikonfirmasi oleh berita dari detikcom.",
+   "bukti": [
+    {
+     "sumber": "detikcom",
+     "url": "https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini",
+     "kutipan": "Kementerian Kesehatan sedang membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional sampai 30 Oktober 2026."
+    }
+   ],
+   "worker_task_id": "dde51b5dac704f4f9e3986e46111cc2a",
+   "worker_context_id": "43c9f9c843c349c6accea123c8238956",
+   "status_task": "completed",
+   "catatan": [],
+   "langkah": [
+    {
+     "nomor": 0,
+     "alasan": "pencarian awal otomatis (paralel, bukan keputusan model)",
+     "tool": "cari_cek_fakta",
+     "argumen": {
+      "query": "Pendaftaran Beasiswa Afirmasi Nakes Prioritas Nasional 2026 dilakukan sampai 30 Oktober 2026."
+     },
+     "observasi": "0 hasil: ",
+     "waktu_ms": 609.8,
+     "observasi_lengkap": "{\"query\": \"Pendaftaran Beasiswa Afirmasi Nakes Prioritas Nasional 2026 dilakukan sampai 30 Oktober 2026.\", \"jumlah\": 0, \"hasil\": [], \"disaring_blocklist\": 0, \"dari_cache\": false}"
+    },
+    {
+     "nomor": 0,
+     "alasan": "pencarian awal otomatis (paralel, bukan keputusan model)",
+     "tool": "cari_wikipedia",
+     "argumen": {
+      "query": "Pendaftaran Beasiswa Afirmasi Nakes Prioritas Nasional 2026 dilakukan sampai 30 Oktober 2026."
+     },
+     "observasi": "1 hasil: Unjuk rasa di Indonesia 2025",
+     "waktu_ms": 609.8,
+     "observasi_lengkap": "{\"query\": \"Pendaftaran Beasiswa Afirmasi Nakes Prioritas Nasional 2026 dilakukan sampai 30 Oktober 2026.\", \"bahasa\": \"id\", \"jumlah\": 1, \"hasil\": [{\"judul\": \"Unjuk rasa di Indonesia 2025\", \"cuplikan\": \"satu peserta, Ainul Mardhyah dari Front Mahasiswa Nasional, menyatakan bahwa beasiswa afirmasinya mengalami pemotongan sebesar 10%. Sebagai anak buruh\", \"url\": \"https://id.wikipedia.org/wiki/Unjuk_rasa_di_Indonesia_2025\"}], \"dari_cache\": false}"
+    },
+    {
+     "nomor": 1,
+     "alasan": "Hasil pencarian awal menunjukkan bahwa belum ada artikel cek fakta yang membahas klaim ini secara spesifik. Saya akan mencari dengan kata kunci yang lebih singkat untuk melihat apakah ada informasi/cek fakta tentang beasiswa ini.",
+     "tool": "cari_cek_fakta",
+     "argumen": {
+      "query": "Beasiswa Afirmasi Nakes Prioritas Nasional"
+     },
+     "observasi": "0 hasil: ",
+     "waktu_ms": 929.4,
+     "observasi_lengkap": "{\"query\": \"Beasiswa Afirmasi Nakes Prioritas Nasional\", \"jumlah\": 0, \"hasil\": [], \"disaring_blocklist\": 0, \"dari_cache\": false}"
+    },
+    {
+     "nomor": 2,
+     "alasan": "Karena pencarian cek fakta tidak membuahkan hasil, saya akan mencari berita atau pengumuman resmi-seperti-nya di media massa untuk mencari tahu tentang jadwal pendaftaran beasiswa tersebut. Saya akan menggunakan kata kunci yang lebih ringkas.",
+     "tool": "cari_berita",
+     "argumen": {
+      "query": "Beasiswa Afirmasi Nakes Prioritas Nasional 2026"
+     },
+     "observasi": "1 hasil: Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mah",
+     "waktu_ms": 882.6,
+     "observasi_lengkap": "{\"query\": \"Beasiswa Afirmasi Nakes Prioritas Nasional 2026\", \"rentang\": \"2026-09-29 s.d. sekarang\", \"total_di_gnews\": 1, \"jumlah\": 1, \"hasil\": [{\"judul\": \"Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mahasiswa 9 Prodi Ini!\", \"cuplikan\": \"Kementerian Kesehatan membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional hingga 30 Oktober 2026. Beasiswa termasuk biaya hidup.\", \"sumber\": \"detikcom\", \"terbit\": \"2026-10-23\", \"url\": \"https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini\"}], \"dibuang_gnews\": [], \"disaring_blocklist\": 0, \"dari_cache\": false, \"sisa_kuota_hari_ini\": 77}"
+    },
+    {
+     "nomor": 3,
+     "alasan": "Saya menemukan satu artikel berita dari detikcom yang sangat relevan dengan klaim. Saya akan membaca isi artikel tersebut untuk memastikan informasi mengenai tanggal pendaftaran benar-benar sesuai dengan klaim.",
+     "tool": "ambil_halaman",
+     "argumen": {
+      "url": "https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini"
+     },
+     "observasi": "Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mahasiswa 9 Prodi Ini! | Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mahasiswa 9 Prodi Ini! ... Tautan telah disalin MENU detikcom Terpopuler Live TV Kirim Tulisa",
+     "waktu_ms": 450.4,
+     "observasi_lengkap": "{\"url\": \"https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini\", \"judul\": \"Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mahasiswa 9 Prodi Ini!\", \"teks\": \"Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mahasiswa 9 Prodi Ini! ... Tautan telah disalin MENU detikcom Terpopuler Live TV Kirim Tulisan Kategori Berita detikNews detikFinance detikInet detikHot detikSport Sepakbola detikOto detikTravel detikFood detikHealth Wolipop DetikX 20Detik detikFoto detikEdu detikHikmah detikProperti detikPop Daerah detikJateng detikJatim detikJabar detikSulsel detikSumut detikBali detikSumbagsel detikJogja detikKalimantan Layanan For Your Business Pasang Mata adsmart detikEvent Trans Snow World Trans Studio Flying Over Indonesia berbuatbaik.id ziswafctarsa.id Signature Awards Bingkai.id Trans Hotel Group Community Connect NEW Rekomendit NEW Hipdut NEW Top Up & Tagihan Game Paket Data Pulsa Prabayar Token PLN E-wallet BPJS Kesehatan PLN Pascabayar PDAM TV & Internet Streaming Detik Network IndonesiaNow.co NEW Hai Bunda CNN Indonesia CNBC Indonesia Beautynesia Female Daily CXO Media Cancel Yang sedang ramai dicari Loading... Promoted Terakhir yang dicari Loading... ADVERTISEMENT detikEdu Beasiswa Ada Beasiswa Afirmasi Nakes Prioritas Nasional 2026 buat Mahasiswa 9 Prodi Ini! Trisna Wulandari - detikEdu Jumat, 23 Okt 2026 09:00 WIB ... Tautan telah disalin Ilustrasi. Foto: thinkstock Daftar Isi Beasiswa Afirmasi Nakes Prioritas Nasional Kemenkes 2026 9 Prodi Beasiswa Syarat Beasiswa Jadwal Beasiswa Afirmasi Nakes Prioritas Nasional Kemenkes 2026 Jakarta - Kementerian Kesehatan sedang membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional sampai 30 Oktober 2026. Mahasiswa bisa mendaftar. Berdasarkan petunjuk teknisnya, bantuan ini merupakan bantuan biaya pendidikan penuh bagi calon tenaga kesehatan untuk pemenuhan pelayanan diagnostik, kefarmasian, dan kesehatan gigi di fasilitas pelayanan kesehatan pemerintah. Penerima beasiswa juga dapat memperoleh biaya hidup hingga biaya skripsi. Penerima beasiswa nantinya wajib melaksanakan masa pengabdian di fasilitas pelayanan kesehatan di puskesmas atau RS sesuai penetapan prioritas nasional Kementerian Kesehatan. Masa pengabdian ini minimal 3 tahun untuk penempatan di Daerah Tertinggal, Perbatasan, Kepulauan (DTPK) dan Daerah Bermasalah Kesehatan (DBK). SCROLL TO CONTINUE WITH CONTENT Sedangkan masa pengabdian untuk penempatan di wilayah selain DTPK atau DBK yaitu minimal 4 tahun. Baca juga: Kemdikti: Awardee LPDP Dokter Spesialis Bisa Segera Ditugaskan ke Daerah ADVERTISEMENT Beasiswa Afirmasi Nakes Prioritas Nasional Kemenkes 2026 Beasiswa ini meliputi: Biaya Operasional Pendidikan (BOP), SPI, atau IPI, dibayarkan 1 kali bagi mahasiswa sejak semester 1, langsung ke perguruan tinggi Uang Kuliah Tunggal (UKT) atau SPP per semester, dibayarkan ke perguruan tinggi sesuai ketentuan institusi Biaya hidup dan operasional,  …[dipotong]"
+    },
+    {
+     "nomor": 4,
+     "alasan": "Saya akan memeriksa apakah kalimat \"Kementerian Kesehatan sedang membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional sampai 30 Oktober 2026\" tertulis persis di artikel detikcom tersebut.",
+     "tool": "cek_kutipan",
+     "argumen": {
+      "kutipan": "Kementerian Kesehatan sedang membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional sampai 30 Oktober 2026.",
+      "url": "https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini"
+     },
+     "observasi": "ditemukan=True kecocokan=1.0",
+     "waktu_ms": 22.4,
+     "observasi_lengkap": "{\"url\": \"https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini\", \"ditemukan\": true, \"kecocokan\": 1.0, \"konteks\": \"rmasi nakes prioritas nasional kemenkes 2026 9 prodi beasiswa syarat beasiswa jadwal beasiswa afirmasi nakes prioritas nasional kemenkes 2026 jakarta kementerian kesehatan sedang membuka pendaftaran beasiswa afirmasi tenaga kesehatan prioritas nasional sampai 30 oktober 2026 mahasiswa bisa mendaftar berdasarkan petunjuk teknisnya bantuan ini merupakan bantuan biaya pendidikan penuh bagi calon tenaga kesehatan untuk pemenu\", \"dari_cache\": true}"
+    },
+    {
+     "nomor": 5,
+     "alasan": "Bukti dari artikel detikcom secara eksplisit menyatakan bahwa Kementerian Kesehatan sedang membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional sampai 30 Oktober 2026. Hal ini sesuai dengan klaim yang diperiksa.",
+     "tool": "jawab",
+     "argumen": {
+      "bukti": [
+       {
+        "sumber": "detikcom",
+        "url": "https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini",
+        "kutipan": "Kementerian Kesehatan sedang membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional sampai 30 Oktober 2026."
+       }
+      ],
+      "ringkasan": "Klaim bahwa pendaftaran Beasiswa Afirmasi Nakes Prioritas Nasional 2026 dilakukan sampai 30 Oktober 2026 adalah benar, sebagaimana dikonfirmasi oleh berita dari detikcom.",
+      "sikap": "MENDUKUNG",
+      "keyakinan": 1
+     },
+     "observasi": "jawaban diterima",
+     "waktu_ms": 0.0,
+     "observasi_lengkap": ""
+    }
+   ],
+   "token": 15736,
+   "token_critic": 1156,
+   "revisi": 0,
+   "putaran": [
+    {
+     "putaran": 1,
+     "worker_task_id": "dde51b5dac704f4f9e3986e46111cc2a",
+     "status_task": "completed",
+     "sikap": "MENDUKUNG",
+     "critic": "TERIMA",
+     "alasan_critic": "Kutipan dari sumber detikcom yang ditemukan di halaman secara langsung mendukung klaim mengenai batas waktu pendaftaran beasiswa tersebut. Bukti yang diberikan sangat kuat dan relevan dengan klaim. Verifikasi kutipan melalui sistem telah mengonfirmasi kecocokan penuh.",
+     "sumber_keputusan": "llm"
+    }
+   ],
+   "penilaian_critic": {
+    "keputusan": "TERIMA",
+    "alasan": "Kutipan dari sumber detikcom yang ditemukan di halaman secara langsung mendukung klaim mengenai batas waktu pendaftaran beasiswa tersebut. Bukti yang diberikan sangat kuat dan relevan dengan klaim. Verifikasi kutipan melalui sistem telah mengonfirmasi kecocokan penuh.",
+    "saran_perbaikan": "",
+    "sumber_keputusan": "llm",
+    "pemeriksaan_kutipan": [
+     {
+      "url": "https://www.detik.com/edu/beasiswa/d-8719712/ada-beasiswa-afirmasi-nakes-prioritas-nasional-2026-buat-mahasiswa-9-prodi-ini",
+      "kutipan": "Kementerian Kesehatan sedang membuka pendaftaran Beasiswa Afirmasi Tenaga Kesehatan Prioritas Nasional sampai 30 Oktober 2026.",
+      "status": "ditemukan_di_halaman",
+      "kecocokan": 1.0,
+      "konteks": "rmasi nakes prioritas nasional kemenkes 2026 9 prodi beasiswa syarat beasiswa jadwal beasiswa afirmasi nakes prioritas nasional kemenkes 2026 jakarta kementerian kesehatan sedang membuka pendaftaran beasiswa afirmasi tenaga kesehatan prioritas nasional sampai 30 oktober 2026 mahasiswa bisa mendaftar berdasarkan petunjuk teknisnya bantuan ini merupakan bantuan biaya pendidikan penuh bagi calon tena",
+      "catatan": ""
+     }
+    ],
+    "token": 1156,
+    "waktu_detik": 5.5
+   },
+   "anggaran_token": 74642
+  }
+ ],
+ "token": {
+  "orchestrator": 715,
+  "worker": 30292,
+  "critic": 2217
+ },
+ "catatan": [],
+ "waktu_detik": 200.6,
+ "critic_aktif": true,
+ "anggaran_token": 150000
+}

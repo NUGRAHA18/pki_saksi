@@ -80,35 +80,54 @@ class TestTeksKemajuan(unittest.TestCase):
 
 
 class TestHalaman(unittest.TestCase):
-    def run_app(self, report=None) -> AppTest:
+    def run_app(self, chat=None, prompt=None) -> AppTest:
         at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=30)
-        if report:
-            at.session_state["report"] = report
+        if chat is not None:
+            at.session_state["chat"] = chat
         # agent dianggap mati, apa pun keadaan komputer saat tes (bisa saja run_all.py sedang berjalan)
         with mock.patch("httpx.get", side_effect=httpx.ConnectError("mati")):
-            return at.run()
+            at.run()
+            if prompt is not None:
+                at.chat_input[0].set_value(prompt).run()
+        return at
 
     def html(self, at: AppTest) -> str:
         return "\n".join(block.value for block in at.markdown)
 
-    def test_agent_mati(self):
+    def test_sambutan_dan_contoh_pesan(self):
         at = self.run_app()
         self.assertFalse(at.exception)
-        self.assertIn("SAKSI", self.html(at))
+        self.assertIn("Tempel pesan berantai", self.html(at))
+        examples = [b for b in at.button if b.key and b.key.startswith("contoh_")]
+        self.assertEqual(len(examples), 3)
         self.assertIn("tidak aktif", "\n".join(block.value for block in at.sidebar.markdown))
-        self.assertTrue(at.button[0].disabled)  # tombol mati selama pesan kosong
+        self.assertEqual(len(at.chat_input), 1)
 
-    def test_laporan_ditampilkan(self):
-        at = self.run_app(REPORT)
+    def test_kirim_pesan_saat_agent_mati(self):
+        at = self.run_app(prompt="Denda tilang naik 150 persen")
+        self.assertFalse(at.exception)
+        chat = at.session_state["chat"]
+        self.assertEqual([turn["role"] for turn in chat], ["user", "assistant"])
+        self.assertIn("Belum semua agent aktif", chat[1]["text"])
+
+    def test_laporan_dalam_percakapan(self):
+        at = self.run_app(chat=[{"role": "user", "text": REPORT["pesan"]}, {"role": "assistant", "report": REPORT}])
         self.assertFalse(at.exception)
         html = self.html(at)
+        self.assertIn("**HOAKS.** Pesan ini memuat klaim yang dibantah sumber", html)
         self.assertIn('class="label">HOAKS', html)
         self.assertIn("1 klaim hoaks, tidak ada klaim yang terbukti benar", html)  # tanpa "aturan 3:"
         self.assertIn("[SALAH] Denda Tilang Naik 150 Persen", html)
         self.assertIn("kutipan sesuai hasil pencarian sumber", html)
         self.assertIn("setelah 1 kali perbaikan", html)
         self.assertIn("Tidak diperiksa karena berupa opini", html)
-        self.assertIsNone(re.search(r"AI|kecerdasan buatan|artificial", html, re.IGNORECASE))  # tidak ada kata "AI"
+        self.assertEqual(len([b for b in at.button if b.key and b.key.startswith("contoh_")]), 0)  # sambutan hilang
+        self.assertIsNone(re.search(r"\bAI\b|kecerdasan buatan|artificial", html, re.IGNORECASE))
+
+    def test_pola_kata_ai_benar_benar_memeriksa(self):
+        # penjaga: memastikan pola di atas memang menangkap kata "AI" (dulu pola ini rusak dan selalu lolos)
+        self.assertIsNotNone(re.search(r"\bAI\b", "Diperiksa oleh AI"))
+        self.assertIsNone(re.search(r"\bAI\b", "BUKAN KLAIM FAKTUAL"))
 
 
 if __name__ == "__main__":

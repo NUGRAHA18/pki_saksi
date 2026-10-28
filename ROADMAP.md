@@ -1013,3 +1013,56 @@ Tes: 127, semua lulus.
   proyek.
 - Catatan: key Fact Check dan GNews sempat tercetak di output terminal saat uji pertama Fase 1 (sebelum logger `httpx`
   dimatikan). Keduanya tidak ada di file proyek, tetapi sebaiknya dibuat ulang sebelum repo dibuka untuk umum.
+
+### UI diubah menjadi percakapan (28 Okt, atas permintaan pemilik proyek)
+
+Diminta: tampilan bergaya chat interaktif seperti ChatGPT. Cara interaksinya mengikuti pola chat; gayanya tetap tenang
+(tanpa ikon robot, kilau, atau kata "AI"), sesuai permintaan sebelumnya.
+
+| Bagian | Isi |
+|---|---|
+| Percakapan | `st.chat_input` di bawah; pesan pengguna sebagai gelembung di kanan, jawaban SAKSI di kiri (ikon `fact_check`, bukan robot) |
+| Sambutan | Saat percakapan kosong: penjelasan singkat dan 3 tombol contoh pesan yang bisa langsung dikirim |
+| Kemajuan | Di dalam gelembung jawaban: `st.status` "Memeriksa pesan… N detik" yang bertambah baris demi baris dari audit log, lalu terlipat menjadi "Selesai diperiksa dalam N detik" |
+| Jawaban | Dibuka dengan kalimat ringkas ("**HOAKS.** Pesan ini memuat klaim yang dibantah sumber…"), lalu kartu putusan, kartu per klaim, catatan teknis, dan *expander* "Kerja setiap agent" |
+| Sidebar | Tombol "Percakapan baru", status agent, dan daftar "Pemeriksaan sebelumnya" (12 terakhir) yang bisa dibuka kembali ke dalam percakapan |
+| Batasan yang ditampilkan | "Setiap pesan diperiksa terpisah; pesan sebelumnya tidak ikut diperhitungkan." SAKSI bukan chatbot yang mengingat konteks |
+
+**Bug tes yang ditemukan saat perubahan ini.** Tes "tidak ada kata AI di halaman" berisi karakter backspace (``),
+bukan ``, akibat kesalahan escape saat patch sebelumnya. Akibatnya tes itu **selalu lulus tanpa memeriksa apa
+pun**. Pola sudah diperbaiki dan ditambah tes penjaga yang memastikan pola benar-benar menangkap kata "AI". Seluruh file
+proyek diperiksa: tidak ada karakter kontrol lain.
+
+Tes: `tests/test_app.py` 7 tes (sambutan + contoh, kirim pesan saat agent mati, laporan dalam percakapan, penjaga
+pola). Total tes proyek: 129, semua lulus.
+
+### Tema gelap dan perapian tata letak (28 Okt, atas permintaan pemilik proyek)
+
+Referensi dari pemilik proyek: screenshot antarmuka chat gelap ala ChatGPT (file referensi sudah dihapus dari `data/` agar tidak ikut ter-commit). Tampilan kini
+**diperiksa dengan screenshot sungguhan** (Playwright + Chrome headless, di virtualenv terpisah di luar proyek),
+tidak hanya lewat tes otomatis.
+
+| Bagian | Isi |
+|---|---|
+| Tema | `.streamlit/config.toml`: `base = "dark"`, latar #0b0b0d, sidebar #111114, aksen ungu #8b7cf6, radius 12 px; tombol Deploy disembunyikan (`client.toolbarMode = "minimal"`) |
+| Sambutan | Judul + subjudul di tengah, 4 kartu fitur (gradasi biru/oranye/ungu/teal: arsip cek fakta, Wikipedia & berita, kutipan terverifikasi, pemeriksa independen) dalam satu grid CSS (4 kolom; 2×2 di layar <1100 px), 3 chip saran berbentuk pil |
+| Sidebar | Kartu merek, "Percakapan baru", status agent bertitik warna, riwayat dikelompokkan Hari ini / Kemarin / Sebelumnya, satu baris rata kiri dengan ikon sesuai putusan |
+| Percakapan | Pesan pengguna sebagai gelembung di kanan tanpa ikon; jawaban di kiri. Kartu klaim memakai `st.container(border=True)` sehingga "Jejak pemeriksaan" berada di dalam kartunya |
+| Lain-lain | Tombol "Ekspor percakapan" (Markdown); `?laporan=<correlation_id>` membuka laporan tersimpan langsung (untuk demo); catatan teknis dipindah ke dalam "Kerja setiap agent" |
+
+Masalah tata letak yang ditemukan lewat screenshot dan diperbaiki:
+1. Sambutan terpotong di atas → margin atas menyesuaikan tinggi layar (`clamp`), kartu di layar sempit tanpa tinggi
+   minimum.
+2. Tombol contoh selebar layar dengan teks dua baris → chip pil pendek.
+3. Riwayat rata tengah, tiga baris per item → satu baris rata kiri (isi `span` di dalam tombol ternyata diatur
+   ke tengah; diketahui lewat pemeriksaan DOM).
+4. Expander jejak terpisah dari kartu klaim → di dalam kartu.
+5. Catatan teknis mentah (`['']`) di bawah jawaban → dipindah.
+6. Deskripsi kartu fitur tidak sejajar → judul kartu bukan heading (Streamlit menambahkan ikon tautan pada h1–h6).
+7. Gelembung pengguna tidak pindah ke kanan → kedua peran memakai ikon kustom (`stChatMessageAvatarCustom`), jadi
+   pesan pengguna kini dikenali dari penanda `.from-user`.
+8. Baris terakhir gelembung terpotong → Streamlit memberi `margin-bottom: -16px` pada wadah Markdown; dinetralkan di
+   gelembung pengguna.
+9. Aturan `@media` tertimpa karena diletakkan sebelum aturan dasarnya → urutan CSS diperbaiki.
+
+Tes: 129, semua lulus.

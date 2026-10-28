@@ -1,0 +1,24 @@
+{
+ "correlation_id": "d40382dc482c",
+ "pesan": "Gempa magnitudo 5,9 mengguncang Sumba Barat Daya pada Oktober 2026",
+ "putusan": "TIDAK TERVERIFIKASI",
+ "alasan_putusan": "aturan 1: tidak ada klaim faktual yang bisa diperiksa",
+ "klaim": [
+  {
+   "id": "K1",
+   "teks": "Gempa magnitudo 5,9 mengguncang Sumba Barat Daya pada Oktober 2026",
+   "jenis": "prediksi",
+   "alasan_jenis": "Pernyataan tentang kejadian alam yang belum pasti terjadi di masa depan.",
+   "putusan": "BUKAN KLAIM FAKTUAL"
+  }
+ ],
+ "token": {
+  "orchestrator": 656,
+  "worker": 0,
+  "critic": 0
+ },
+ "catatan": [],
+ "waktu_detik": 3.2,
+ "critic_aktif": true,
+ "anggaran_token": 150000
+}

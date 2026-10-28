@@ -1,0 +1,74 @@
+{
+ "correlation_id": "e53e2d52afc5",
+ "pesan": "apakah ada demo hari ini?",
+ "putusan": "TIDAK TERVERIFIKASI",
+ "alasan_putusan": "aturan 5: 1 dari 1 klaim tidak terverifikasi dan tidak ada hoaks",
+ "klaim": [
+  {
+   "id": "K1",
+   "teks": "Ada demo hari ini",
+   "jenis": "fakta",
+   "alasan_jenis": "Pernyataan tentang keberadaan suatu peristiwa yang dapat dibuktikan kebenarannya.",
+   "putusan": "TIDAK TERVERIFIKASI",
+   "sikap_worker": "TIDAK_CUKUP",
+   "keyakinan": 0.0,
+   "ringkasan": "",
+   "bukti": [],
+   "worker_task_id": "b6d403804c3845e6b4dcd910be1aceaa",
+   "worker_context_id": "73342120dfee4e4a820a1d2065e666dd",
+   "status_task": "failed",
+   "catatan": [
+    "LLM gagal: Gemini gagal setelah 7 percobaan: 500 INTERNAL. {'error': {'code': 500, 'message': 'Internal error encountered.', 'status': 'INTERNAL'}}",
+    "task Worker berakhir failed: LLM gagal: Gemini gagal setelah 7 percobaan: 500 INTERNAL. {'error': {'code': 500, 'message': 'Internal error encountered.', 'status': 'INTERNAL'}}"
+   ],
+   "langkah": [
+    {
+     "nomor": 0,
+     "alasan": "pencarian awal otomatis (paralel, bukan keputusan model)",
+     "tool": "cari_cek_fakta",
+     "argumen": {
+      "query": "Ada demo hari ini"
+     },
+     "observasi": "0 hasil: ",
+     "waktu_ms": 752.2,
+     "observasi_lengkap": "{\"query\": \"Ada demo hari ini\", \"jumlah\": 0, \"hasil\": [], \"disaring_blocklist\": 0, \"dari_cache\": false}"
+    },
+    {
+     "nomor": 0,
+     "alasan": "pencarian awal otomatis (paralel, bukan keputusan model)",
+     "tool": "cari_wikipedia",
+     "argumen": {
+      "query": "Ada demo hari ini"
+     },
+     "observasi": "5 hasil: Unjuk rasa Oktober 2026 di Indonesia; Dongker; Unjuk rasa Juni 2026 di Indonesia",
+     "waktu_ms": 752.2,
+     "observasi_lengkap": "{\"query\": \"Ada demo hari ini\", \"bahasa\": \"id\", \"jumlah\": 5, \"hasil\": [{\"judul\": \"Unjuk rasa Oktober 2026 di Indonesia\", \"cuplikan\": \"Demo BEM SI Hari Ini 5 Oktober 2026&quot;. beritasatu.com. Diakses tanggal 2026-10-05. Rahmayanti, Difa Aurelia (2026-10-05). &quot;Demo BEM SI di DPR Hari Ini\", \"url\": \"https://id.wikipedia.org/wiki/Unjuk_rasa_Oktober_2026_di_Indonesia\"}, {\"judul\": \"Dongker\", \"cuplikan\": \"Hex Dispenser, dan The Exploding Hearts. Periode awal ini terekam dalam satu demo berjudul &quot;Demo 2019&quot; dan dua EP hasil rekaman rumahan mereka, yaitu &quot;Upaya\", \"url\": \"https://id.wikipedia.org/wiki/Dongker\"}, {\"judul\": \"Unjuk rasa Juni 2026 di Indonesia\", \"cuplikan\": \"tribunnnews Sejumlah Mahasiswa Gelar Demo di Gedung DPR Hari Ini. dari situs detik Ada Demo di DPR hingga Bundaran HI Hari Ini, 4.263 Personel Gabungan Disiagakan\", \"url\": \"https://id.wikipedia.org/wiki/Unjuk_rasa_Juni_2026_di_Indonesia\"}, {\"judul\": \"Unjuk rasa Agustus 2026 di Indonesia\", \"cuplikan\": \"31 Titik Jakarta Hari Ini&quot;. Bisnis.com. Diakses tanggal 2026-08-18. Fathurohman, Irfan (2026-08-18). &quot;Ada 31 Demo di Jakarta Hari Ini, BEM UI di Bundaran\", \"url\": \"https://id.wikipedia.org/wiki/Unjuk_rasa_Agustus_2026_di_Indonesia\"}, {\"judul\": \"Unjuk rasa dan kerusuhan Indonesia Agustus–September 2025\", \"cuplikan\": \"Diakses tanggal 2025-08-30. Dicky Setyawan (29 Agustus 2025). &quot;Apakah Ada Demo Hari Ini 29 Agustus 2025 di Jogja?&quot;. Tito.id. Diarsipkan dari versi aslinya\", \"url\": \"https://id.wikipedia.org/wiki/Unjuk_rasa_dan_kerusuhan_Indonesia_Agustus%E2%80%93September_2025\"}], \"dari_cache\": false}"
+    }
+   ],
+   "token": 5520,
+   "token_critic": 0,
+   "revisi": 0,
+   "putaran": [
+    {
+     "putaran": 1,
+     "worker_task_id": "b6d403804c3845e6b4dcd910be1aceaa",
+     "status_task": "failed",
+     "sikap": "TIDAK_CUKUP",
+     "critic": "",
+     "alasan_critic": ""
+    }
+   ],
+   "penilaian_critic": null,
+   "anggaran_token": 149377
+  }
+ ],
+ "token": {
+  "orchestrator": 623,
+  "worker": 5520,
+  "critic": 0
+ },
+ "catatan": [],
+ "waktu_detik": 90.3,
+ "critic_aktif": true,
+ "anggaran_token": 150000
+}
